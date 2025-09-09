@@ -1,0 +1,34 @@
+# FMP + ChatGPT Proxy (erweitert)
+
+Dieses Backend holt von **FMP**:
+- Quote
+- Income Statement (TTM/annual/quarter)
+- Balance Sheet (annual/quarter)
+- Cash Flow Statement (TTM/annual/quarter)
+- Financial Ratios (TTM/annual/quarter)
+- Peers
+- News
+
+Und erzeugt via OpenAI eine kompakte Analyse.
+
+## Deploy (Render.com, Docker)
+
+1) Repo auf GitHub pushen.
+2) Render.com → New Web Service → Repo wählen (Docker erkannt).
+3) Env Vars setzen:
+   - `FMP_API_KEY`
+   - `OPENAI_API_KEY`
+   - `ACTION_KEY` (geheimer Schlüssel für ChatGPT Actions)
+   - `OPENAI_MODEL` (optional, z.B. gpt-5.1)
+   - `CORS_ORIGINS` (optional)
+4) Deploy. Deine URL: `https://<service>.onrender.com`  
+   OpenAPI: `https://<service>.onrender.com/openapi.json`
+
+## Endpunkte
+
+- `POST /price`
+- `POST /fundamentals`
+- `POST /news`
+- `POST /analyze`
+
+Auth: Sende Header `Authorization: Bearer <ACTION_KEY>`.
